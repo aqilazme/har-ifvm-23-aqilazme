@@ -1,5 +1,13 @@
 import data.set.lattice
 
+/-
+Correctness 90/90
+Style: 10/10
+Good work Aqil
+-/
+
+
+
 /- This assignment is due by 11:59pm on Friday, March 3, 2023 . -/
 
 /-
