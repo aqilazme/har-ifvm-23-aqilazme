@@ -32,10 +32,30 @@ axiom subgroup_nonempty {α : Type*} (H : subgroup α) : ∃ x : α, x ∈ H.ele
 axiom subgroup_closedproducts {α : Type*} (H : subgroup α) : ∀ x y : α, x ∈ H.elements → y ∈ H.elements → H.mul x y ∈ H.elements
 
 --Then, we define the binary relation
+class myequivalence (α : Type*) :=
+(R: α → α → Prop)
+(refl: ∀ x : α, R x x)
+(symm: ∀ x y : α, R x y → R y x)
+(trans: ∀ x y z : α, R x y → R y z → R x z)
+
+--Specifying it in the context of groups when it is induced by subgroup:
+--Def (Equivalence relation induced by a subgroup): Let G be a group, and H ≤ G a subgroup of G. For a,b ∈ G, we say R a b iff ∃ h ∈ H such that a = bh, i.e. b⁻¹a ∈ H.
+def subgroup_relation {α : Type*} [mygroup α] (H : subgroup α) (a b : α) : Prop :=
+∃ h : α , h ∈ H.elements ∧ (a = H.mul b h ∨ H.mul (H.inv b) a ∈ H.elements)    
 
 --Then, we prove that the binary relation is an equivalence relation on G
+def subgroup_equivalence {α : Type*} [mygroup α] (H : subgroup α) : myequivalence α :=
+{
+  R := sorry,
+  refl := sorry,
+  symm := sorry,
+  trans := sorry,
+}
 
 --Then, we define the left coset of H
+--Def (Equivalence class of g) = {x ∈ G | R x g}  
+def left_coset {α : Type*} [mygroup α] (H : subgroup α) (g : α) : set α :=
+sorry
 
 --Then, show that if e is the identity element of G, it is also the identity element of H
 
