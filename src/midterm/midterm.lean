@@ -1,6 +1,15 @@
 import tactic
 import data.set
 
+/-
+Great work Aqil!
+100/100
+One tiny thing for a futerue project: in the write-up, it might be nice
+to highlight the equivalence relation more prominently, possily as part of a 
+brief introduction about the main result before moving on to the 
+definitions and lemmas.
+-/
+
 
 --Proposition: "Let H be any subgroup of the group G.
 --The set of the left cosets of H form a partition of G".
@@ -37,7 +46,9 @@ begin
   exact h1,
 end
 
---With the way Lean syntax works, sometimes I need a statement like x ∈ G.elements explicitly, which Lean can't infer on its own even if we have x : α, and have defined above that G.elements : set α
+--With the way Lean syntax works, sometimes I need a statement like 
+-- x ∈ G.elements explicitly, which Lean can't infer on its own even 
+-- if we have x : α, and have defined above that G.elements : set α
 --This makes the definition explicit
 axiom member_of_group {α :Type*} [mygroup α] (G : mygroup α) : ∀ x : α, x ∈ G.elements     
 
@@ -130,13 +141,15 @@ class myequivalence (α : Type*) :=
 (trans: ∀ x y z : α, R x y → R y z → R x z)
 
 --Specifying it in the context of groups when it is induced by subgroup:
---Def (Equivalence relation induced by a subgroup): Let G be a group, and H ≤ G a subgroup of G. For a,b ∈ G, we say R a b iff ∃ h ∈ H such that a = bh, (i.e. b⁻¹a ∈ H).
+--Def (Equivalence relation induced by a subgroup): Let G be a group, 
+-- and H ≤ G a subgroup of G. For a,b ∈ G, we say R a b iff ∃ h ∈ H such that a = bh, (i.e. b⁻¹a ∈ H).
 def subgroup_relation {α : Type*} [mygroup α] (H : subgroup α) (a b : α) : Prop :=
 ∃ h : α , (h ∈ H.elements ∧ (a = H.mul b h)) 
 
 --Then, we prove that the binary relation is an equivalence relation on G
 --It turns out that I need the obvious result that if h ∈ H, then h⁻¹ ∈ H 
-axiom subgroup_inv_closed {α : Type*} [mygroup α] (H : subgroup α) (h : α) (h' : h ∈ H.elements): (H.inv h) ∈ H.elements
+axiom subgroup_inv_closed {α : Type*} [mygroup α] (H : subgroup α) (h : α) 
+(h' : h ∈ H.elements): (H.inv h) ∈ H.elements
 
 def subgroup_equivalence {α : Type*} [mygroup α] (H : subgroup α) : myequivalence α :=
 {
@@ -425,7 +438,8 @@ begin
 end   
 
 --Finally, show the union of the left cosets of H is equal to G
-lemma union_left_cosets_eq_group {α : Type*} (G : mygroup α) (H : subgroup α) : (⋃ x : α, left_coset x H) = G.elements :=
+lemma union_left_cosets_eq_group {α : Type*} (G : mygroup α) (H : subgroup α) : 
+(⋃ x : α, left_coset x H) = G.elements :=
 begin
   ext,
   split,
